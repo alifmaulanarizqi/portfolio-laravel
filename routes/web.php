@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Home\HomeSlideController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//============= FRONTEND =============//
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.index');
 });
 
-// admin all route
+//============= BACKEND =============//
+// admin routes
 Route::controller(AdminController::class)->group(function() {
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
     Route::get('/admin/profile', 'profile')->name('admin.profile');
@@ -27,6 +30,12 @@ Route::controller(AdminController::class)->group(function() {
     Route::post('/admin/profile/edit', 'storeProfile')->name('store.profile');
     Route::get('/admin/change-password', 'changePassword')->name('change.password');
     Route::post('/admin/change-password', 'updatePassword')->name('update.password');
+});
+
+// home slider routes
+Route::controller(HomeSlideController::class)->group(function() {
+    Route::get('/slide', 'getHomeSlide')->name('home.slide');
+    Route::post('/slide', 'updateHomeSlide')->name('update.slide');
 });
 
 Route::get('/dashboard', function () {

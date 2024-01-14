@@ -83,7 +83,7 @@ class AdminController extends Controller
 
             $file = $request->file('profile_image');
 
-            $fileName = date('YmdHi').$file->getClientOriginalName();
+            $fileName = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
             $file->move(public_path('upload/admin_images'), $fileName);
 
             $userEdit->profile_image = $fileName;
