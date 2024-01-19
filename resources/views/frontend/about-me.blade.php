@@ -161,50 +161,16 @@
                             <div class="tab-pane fade" id="awards" role="tabpanel" aria-labelledby="awards-tab">
                                 <div class="about__award__wrap">
                                     <div class="row justify-content-center">
-                                        <div class="col-md-6 col-sm-9">
-                                            <div class="about__award__item">
-                                                <div class="award__logo">
-                                                    <img src="assets/img/images/awards_01.png" alt="">
-                                                </div>
-                                                <div class="award__content">
-                                                    <h5 class="title">Best ux designer award in 2002</h5>
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-9">
-                                            <div class="about__award__item">
-                                                <div class="award__logo">
-                                                    <img src="assets/img/images/awards_02.png" alt="">
-                                                </div>
-                                                <div class="award__content">
-                                                    <h5 class="title">BBA final examination 2001</h5>
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
+                                        @foreach ($awards as $award)
+                                            <div class="col-md-6 col-sm-9">
+                                                <div class="about__award__item">
+                                                    <div class="award__content">
+                                                        <h5 class="title">{{ $award->title }}</h5>
+                                                        <p>{{ $award->desc }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-9">
-                                            <div class="about__award__item">
-                                                <div class="award__logo">
-                                                    <img src="assets/img/images/awards_03.png" alt="">
-                                                </div>
-                                                <div class="award__content">
-                                                    <h5 class="title">User research award 2020</h5>
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-sm-9">
-                                            <div class="about__award__item">
-                                                <div class="award__logo">
-                                                    <img src="assets/img/images/awards_04.png" alt="">
-                                                </div>
-                                                <div class="award__content">
-                                                    <h5 class="title">Dsigning award 2021</h5>
-                                                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
