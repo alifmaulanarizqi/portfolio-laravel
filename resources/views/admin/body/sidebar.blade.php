@@ -33,6 +33,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('about.me.basic') }}">About Me</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('index.award') }}">Award</a></li>
+                    </ul>
                 </li>
 
                 <li class="menu-title">Pages</li>

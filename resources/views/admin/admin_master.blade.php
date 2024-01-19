@@ -28,6 +28,8 @@
         <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
         <!-- toast -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+        <!-- Datatable -->
+        <link href="{{ asset('backend/assets/css/datatables.min.css') }}" rel="stylesheet">
 
     </head>
 
@@ -93,10 +95,10 @@
         <script src="{{asset('backend/assets/js/app.js')}}"></script>
 
         <!--tinymce js-->
-        <script src="{{ 'backend/assets/libs/tinymce/tinymce.min.js' }}"></script>
+        <script src="{{ asset('backend/assets/libs/tinymce/tinymce.min.js') }}"></script>
 
         <!-- init js -->
-        <script src="{{ 'backend/assets/js/pages/form-editor.init.js' }}"></script>
+        <script src="{{ asset('backend/assets/js/pages/form-editor.init.js') }}"></script>
 
         <!-- toast -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -118,6 +120,24 @@
                         break;
                 }
             @endif
+        </script>
+
+        <!-- Datatables -->
+        <script src="{{ asset('backend/assets/js/datatables.min.js') }}"></script>
+        <script>
+        $(document).ready(function () {
+            $('#dtBasicExample').DataTable({
+                "searching": true
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+
+        $(document).ready(function () {
+            $('#dtBasicExample2').DataTable({
+                "searching": true
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
         </script>
     </body>
 

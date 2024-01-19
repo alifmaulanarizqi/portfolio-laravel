@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 //============= FRONTEND =============//
 Route::controller(FrontendController::class)->group(function() {
     Route::get('/', 'getMainPage');
-    Route::get('/home/about-me', 'getAboutPage')->name('home.about');
+    Route::get('/about-me', 'getAboutPage')->name('home.about');
     Route::get('/pdf-viewer', 'showPDF')->name('show.pdf');
 });
 
@@ -38,14 +38,20 @@ Route::controller(AdminController::class)->group(function() {
 
 // home slider routes
 Route::controller(HomeSlideController::class)->group(function() {
-    Route::get('/slide', 'getHomeSlide')->name('home.slide');
-    Route::post('/slide', 'updateHomeSlide')->name('update.slide');
+    Route::get('/admin/slide', 'getHomeSlide')->name('home.slide');
+    Route::post('/adminslide', 'updateHomeSlide')->name('update.slide');
 });
 
 // about me routes
 Route::controller(AboutController::class)->group(function() {
-    Route::get('/about-me', 'getAboutMe')->name('about.me.basic');
-    Route::post('/about-me', 'updateAboutMe')->name('update.about.me');
+    Route::get('/admin/about-me', 'getAboutMe')->name('about.me.basic');
+    Route::post('/admin/about-me', 'updateAboutMe')->name('update.about.me');
+    Route::get('/admin/award', 'getAward')->name('index.award');
+    Route::get('/admin/award/add', 'addAward')->name('add.award');
+    Route::post('/admin/award/store', 'storeAward')->name('store.award');
+    Route::get('/admin/award/edit/{id}', 'editAward')->name('edit.award');
+    Route::post('/admin/award/update/{id}', 'updateAward')->name('update.award');
+    Route::post('/admin/award/delete', 'deleteAward')->name('delete.award');
 });
 
 Route::get('/dashboard', function () {
