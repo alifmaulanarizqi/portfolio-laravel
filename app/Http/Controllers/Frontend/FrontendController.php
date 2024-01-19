@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AboutMe;
 use App\Models\HomeSlide;
 use App\Models\Award;
+use App\Models\Education;
 
 class FrontendController extends Controller
 {
@@ -19,7 +20,8 @@ class FrontendController extends Controller
     public function getAboutPage() {
         $aboutMe = AboutMe::find(1);
         $awards = Award::all();
-        return view('frontend.about-me', compact('aboutMe', 'awards'));
+        $educations = Education::all();
+        return view('frontend.about-me', compact('aboutMe', 'awards', 'educations'));
     }
 
     public function showPDF() {

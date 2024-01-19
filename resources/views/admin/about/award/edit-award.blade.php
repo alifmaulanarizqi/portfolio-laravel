@@ -22,6 +22,9 @@
                     <div class="form-group mt-2">
                         <label for="desc">Description</label>
                         <textarea type="text" class="form-control" rows="3" name="desc" id="desc">{{ $award->desc }}</textarea>
+                        @error('desc')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="d-flex justify-content-start mt-4">
                         <div class="me-3">
@@ -36,18 +39,5 @@
         </div>
     </div>
 </div>
-
-{{-- <script>
-    $('#award').change(function (e) {
-        $.get('{{ route('
-            checkslug.kategori ') }}', {
-                'award': $(this).val()
-            },
-            function (data) {
-                $('#slug').val(data.slug);
-            }
-        );
-    });
-</script> --}}
 
 @endsection

@@ -177,36 +177,15 @@
                             <div class="tab-pane fade" id="education" role="tabpanel" aria-labelledby="education-tab">
                                 <div class="about__education__wrap">
                                     <div class="row">
+                                        @foreach ($educations as $education)
                                         <div class="col-md-6">
                                             <div class="about__education__item">
-                                                <h3 class="title">DPR Engineering Dhaka University</h3>
-                                                <span class="date">2004 – 2016</span>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                                                alteration in some form, by injected humour.</p>
+                                                <h3 class="title">{{ $education->school }}</h3>
+                                                <span class="date">{{ \Carbon\Carbon::parse($education->entry_year)->format('M, Y') }} – {{ \Carbon\Carbon::parse($education->graduate_year)->format('M, Y') }}</span>
+                                                <p>{{ $education->desc }}</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="about__education__item">
-                                                <h3 class="title">Product Designer at google</h3>
-                                                <span class="date">2021 – Present</span>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,There are many variations of passages of Lorem Ipsum available.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="about__education__item">
-                                                <h3 class="title">Computer Science - england</h3>
-                                                <span class="date">2008 – 2012</span>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,There are many variations of passages of Lorem Ipsum available.</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="about__education__item">
-                                                <h3 class="title">Pro product design with udemey</h3>
-                                                <span class="date">2016 - 2020</span>
-                                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour,There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                                                alteration in some form, by injected humour.</p>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

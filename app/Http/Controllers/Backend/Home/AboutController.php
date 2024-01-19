@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AboutMe;
 use App\Models\Award;
+use App\Models\Education;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\File;
 
 class AboutController extends Controller
 {
+    // about me
     public function getAboutMe() {
         $aboutMe = AboutMe::find(1);
         return view('admin.about.about-me', compact('aboutMe'));
@@ -87,6 +89,9 @@ class AboutController extends Controller
         return redirect()->back()->with($toastNotif);
     }
 
+
+
+    // award
     public function getAward() {
         $awards = Award::latest()->get();
 
@@ -100,6 +105,7 @@ class AboutController extends Controller
     public function storeAward(Request $request) {
         $validated = $request->validate([
             'title' => 'required|max:255',
+            'desc' => 'required',
         ]);
 
         $award = new Award;
@@ -131,6 +137,7 @@ class AboutController extends Controller
     public function updateAward(Request $request, $id) {
         $validated = $request->validate([
             'title' => 'required|max:255',
+            'desc' => 'required',
         ]);
 
         $update = Award::find($id)->update([
@@ -142,7 +149,7 @@ class AboutController extends Controller
 
         if($update) {
             $notif = array(
-                'message' => 'Award added successfully',
+                'message' => 'Award updated successfully',
                 'alert-type' => 'success',
             );
         } else {
@@ -176,8 +183,111 @@ class AboutController extends Controller
             );
         }
 
-
-
         return Redirect()->route('index.award')->with($notif);
+    }
+
+
+
+    // education
+    public function getEducation() {
+        $educations = Education::latest()->get();
+
+        return view('admin.about.education.education', compact('educations'));
+    }
+
+    public function addEducation() {
+        return view('admin.about.education.add-education');
+    }
+
+    public function storeEducation(Request $request) {
+        $validated = $request->validate([
+            'school' => 'required',
+            'entry_year' => 'required',
+            'graduate_year' => 'required',
+            'desc' => 'required',
+        ]);
+
+        $education = new Education;
+        $education->school = $request->school;
+        $education->entry_year = $request->entry_year;
+        $education->graduate_year = $request->graduate_year;
+        $education->desc = $request->desc;
+
+        $notif = array();
+
+        if($education->save()) {
+            $notif = array(
+                'message' => 'Education added successfully',
+                'alert-type' => 'success',
+            );
+        } else {
+            $notif = array(
+                'message' => 'Education added failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return Redirect()->route('index.education')->with($notif);
+    }
+
+    public function editEducation($id) {
+        $education = Education::find($id);
+        return view('admin.about.education.edit-education', compact('education'));
+    }
+
+    public function updateEducation(Request $request, $id) {
+        $validated = $request->validate([
+            'school' => 'required',
+            'entry_year' => 'required',
+            'graduate_year' => 'required',
+            'desc' => 'required',
+        ]);
+
+        $update = Education::find($id)->update([
+            'school' => $request->school,
+            'entry_year' => $request->entry_year,
+            'graduate_year' => $request->graduate_year,
+            'desc' => $request->desc,
+        ]);
+
+        $notif = array();
+
+        if($update) {
+            $notif = array(
+                'message' => 'Education updated successfully',
+                'alert-type' => 'success',
+            );
+        } else {
+            $notif = array(
+                'message' => 'Education update failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return Redirect()->route('index.education')->with($notif);
+    }
+
+    public function deleteEducation() {
+        $id = $_POST['deleteId'];
+        $education = Education::where('id', $id)->first();
+
+        $delete = false;
+        if($education != NULL) {
+            $delete = $education->delete();
+        }
+
+        if($delete) {
+            $notif = array(
+                'message' => 'Education deleted successfully',
+                'alert-type' => 'success',
+            );
+        } else {
+            $notif = array(
+                'message' => 'Education delete failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return Redirect()->route('index.education')->with($notif);
     }
 }

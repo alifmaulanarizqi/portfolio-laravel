@@ -20,9 +20,12 @@
                         @enderror
                     </div>
                     <div class="form-group mt-2">
-                        <label for="desc">Description</label>
+                        <label for="desc">Description <span class="text-danger">*</span></label>
                         <textarea type="text" class="form-control" rows="3" name="desc" id="desc"
                             placeholder="Deadlift 1000 KG"></textarea>
+                        @error('desc')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
                     </div>
                     <div class="d-flex justify-content-start mt-4">
                         <div class="me-3">

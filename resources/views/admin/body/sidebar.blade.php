@@ -36,6 +36,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('index.award') }}">Award</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('index.education') }}">Education</a></li>
+                    </ul>
                 </li>
 
                 <li class="menu-title">Pages</li>
