@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Home\HomeSlideController;
+use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\Home\HomeSlideController;
+use App\Http\Controllers\Backend\Home\AboutController;
+use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 //============= FRONTEND =============//
-Route::get('/', function () {
-    return view('frontend.index');
+Route::controller(FrontendController::class)->group(function() {
+    Route::get('/', 'getMainPage');
+    Route::get('/home/about-me', 'getAboutPage')->name('home.about');
+    Route::get('/pdf-viewer', 'showPDF')->name('show.pdf');
 });
 
 //============= BACKEND =============//
@@ -36,6 +40,12 @@ Route::controller(AdminController::class)->group(function() {
 Route::controller(HomeSlideController::class)->group(function() {
     Route::get('/slide', 'getHomeSlide')->name('home.slide');
     Route::post('/slide', 'updateHomeSlide')->name('update.slide');
+});
+
+// about me routes
+Route::controller(AboutController::class)->group(function() {
+    Route::get('/about-me', 'getAboutMe')->name('about.me.basic');
+    Route::post('/about-me', 'updateAboutMe')->name('update.about.me');
 });
 
 Route::get('/dashboard', function () {

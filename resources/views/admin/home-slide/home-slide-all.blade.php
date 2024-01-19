@@ -40,7 +40,7 @@
                             <div class="row mb-3">
                                 <label for="slide_image" class="col-sm-2 col-form-label">Slide Image</label>
                                 <div class="col-sm-10">
-                                    <input name="slide_image" class="form-control" type="file" id="slide_image">
+                                    <input name="slide_image" class="form-control" type="file" id="slide_image" accept=".png, .jpg, .jpeg">
                                 </div>
                             </div>
                             <div class="row mb-3">

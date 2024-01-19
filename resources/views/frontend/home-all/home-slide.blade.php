@@ -1,7 +1,3 @@
-@php
-    $homeSlide = App\Models\HomeSlide::find(1);
-@endphp
-
 <section class="banner">
     <div class="container custom-container">
         <div class="row align-items-center justify-content-center justify-content-lg-between">
