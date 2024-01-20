@@ -8,6 +8,7 @@ use App\Models\AboutMe;
 use App\Models\HomeSlide;
 use App\Models\Award;
 use App\Models\Education;
+use App\Models\Skill;
 
 class FrontendController extends Controller
 {
@@ -21,7 +22,8 @@ class FrontendController extends Controller
         $aboutMe = AboutMe::find(1);
         $awards = Award::all();
         $educations = Education::all();
-        return view('frontend.about-me', compact('aboutMe', 'awards', 'educations'));
+        $skills = Skill::all();
+        return view('frontend.about-me', compact('aboutMe', 'awards', 'educations', 'skills'));
     }
 
     public function showPDF() {
