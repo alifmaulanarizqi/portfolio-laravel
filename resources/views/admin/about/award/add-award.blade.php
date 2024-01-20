@@ -41,17 +41,4 @@
     </div>
 </div>
 
-{{-- <script>
-    $('#award').change(function (e) {
-        $.get('{{ route('
-            checkslug.kategori ') }}', {
-                'award': $(this).val()
-            },
-            function (data) {
-                $('#slug').val(data.slug);
-            }
-        );
-    });
-</script> --}}
-
 @endsection

@@ -60,6 +60,13 @@ Route::controller(AboutController::class)->group(function() {
     Route::get('/admin/education/edit/{id}', 'editEducation')->name('edit.education');
     Route::post('/admin/education/update/{id}', 'updateEducation')->name('update.education');
     Route::post('/admin/education/delete', 'deleteEducation')->name('delete.education');
+
+    Route::get('/admin/skill', 'getSkill')->name('index.skill');
+    Route::get('/admin/skill/add', 'addSkill')->name('add.skill');
+    Route::post('/admin/skill/store', 'storeSkill')->name('store.skill');
+    Route::get('/admin/skill/edit/{id}', 'editSkill')->name('edit.skill');
+    Route::post('/admin/skill/update', 'updateSkill')->name('update.skill');
+    Route::post('/admin/skill/delete', 'deleteSkill')->name('delete.skill');
 });
 
 Route::get('/dashboard', function () {

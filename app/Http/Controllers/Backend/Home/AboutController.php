@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AboutMe;
 use App\Models\Award;
 use App\Models\Education;
+use App\Models\Skill;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\File;
@@ -289,5 +290,140 @@ class AboutController extends Controller
         }
 
         return Redirect()->route('index.education')->with($notif);
+    }
+
+
+
+    // skill
+    public function getSkill() {
+        $skills = Skill::latest()->get();
+
+        return view('admin.about.skill.skill', compact('skills'));
+    }
+
+    public function addSkill() {
+        return view('admin.about.skill.add-skill');
+    }
+
+    public function storeSkill(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required:max:255',
+            'proficiency' => 'required|numeric|max:100',
+            'icon2' => 'required',
+        ]);
+
+        $iconInput = $request->file('icon2');
+        $iconName = hexdec(uniqid()).'.'.$iconInput->getClientOriginalExtension();
+
+        $manager = new ImageManager(Driver::class);
+        $image = $manager->read($iconInput)->scale(height: 100)->toJpeg(80)->save(base_path('public/upload/about-me/skill-icon/'.$iconName));
+
+        $skill = new Skill;
+        $skill->name = $request->name;
+        $skill->proficiency = $request->proficiency;
+        $skill->icon = 'upload/about-me/skill-icon/'.$iconName;
+
+        $notif = array();
+
+        if($skill->save()) {
+            $notif = array(
+                'message' => 'Skill added successfully',
+                'alert-type' => 'success',
+            );
+        } else {
+            $notif = array(
+                'message' => 'Skill added failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return Redirect()->route('index.skill')->with($notif);
+    }
+
+    public function editSkill($id) {
+        $skill = Skill::find($id);
+        return view('admin.about.skill.edit-skill', compact('skill'));
+    }
+
+    public function updateSkill(Request $request) {
+        $id = $request->id;
+
+        $validated = $request->validate([
+            'name' => 'required:max:255',
+            'proficiency' => 'required|numeric|max:100',
+        ]);
+
+        $affectedRows = -1;
+        if($request->file('icon2')) {
+            $skill = Skill::find($id);
+            $editedIconFilePath = $skill->icon;
+            if (File::exists(public_path($editedIconFilePath))) {
+                File::delete(public_path($editedIconFilePath));
+            }
+
+            $iconInput = $request->file('icon2');
+            $iconName = hexdec(uniqid()).'.'.$iconInput->getClientOriginalExtension();
+
+            $manager = new ImageManager(Driver::class);
+            $icon = $manager->read($iconInput)->scale(height: 100)->toJpeg(80)->save(base_path('public/upload/about-me/skill-icon/'.$iconName));
+
+            $affectedRows = Skill::findOrFail($id)->update([
+                'name' => $request->name,
+                'proficiency' => $request->proficiency,
+                'icon' => 'upload/about-me/skill-icon/'.$iconName,
+            ]);
+        } else {
+            $affectedRows = Skill::findOrFail($id)->update([
+                'name' => $request->name,
+                'proficiency' => $request->proficiency,
+            ]);
+        }
+
+        $toastNotif = array();
+        if($affectedRows > 0) {
+            $toastNotif = array(
+                'message' => 'Skill Updated Successfully',
+                'alert-type' => 'success',
+            );
+        } else {
+            $toastNotif = array(
+                'message' => 'Skill Update Failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return Redirect()->route('index.skill')->with($toastNotif);
+    }
+
+    public function deleteSkill() {
+        $id = $_POST['deleteId'];
+        $skill = Skill::where('id', $id)->first();
+
+        $affectedRows = -1;
+        if($skill->icon) {
+            $editedIconFilePath = $skill->icon;
+            if (File::exists(public_path($editedIconFilePath))) {
+                File::delete(public_path($editedIconFilePath));
+            }
+
+            $affectedRows = $skill->delete();
+        } else {
+            $affectedRows = $skill->delete();
+        }
+
+        $notif = array();
+        if($affectedRows > 0) {
+            $notif = array(
+                'message' => 'Skill deleted successfully',
+                'alert-type' => 'success',
+            );
+        } else {
+            $notif = array(
+                'message' => 'Skill delete failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return Redirect()->route('index.skill')->with($notif);
     }
 }
