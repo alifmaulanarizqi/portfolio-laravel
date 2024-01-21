@@ -15,7 +15,8 @@ class FrontendController extends Controller
     public function getMainPage() {
         $aboutMe = AboutMe::find(1);
         $homeSlide = HomeSlide::find(1);
-        return view('frontend.index', compact('aboutMe', 'homeSlide'));
+        $skills = Skill::latest()->get();
+        return view('frontend.index', compact('aboutMe', 'homeSlide', 'skills'));
     }
 
     public function getAboutPage() {

@@ -44,7 +44,7 @@ class AboutController extends Controller
                 $imageName = hexdec(uniqid()).'.'.$imageInput->getClientOriginalExtension();
 
                 $manager = new ImageManager(Driver::class);
-                $image = $manager->read($imageInput)->scale(height: 605)->toJpeg(80)->save(base_path('public/upload/about-me/'.$imageName));
+                $image = $manager->read($imageInput)->scale(height: 605)->save(base_path('public/upload/about-me/'.$imageName), 80);
 
                 $affectedRows = AboutMe::findOrFail($id)->update([
                     'image' => 'upload/about-me/'.$imageName,
@@ -316,7 +316,7 @@ class AboutController extends Controller
         $iconName = hexdec(uniqid()).'.'.$iconInput->getClientOriginalExtension();
 
         $manager = new ImageManager(Driver::class);
-        $image = $manager->read($iconInput)->scale(height: 100)->toJpeg(80)->save(base_path('public/upload/about-me/skill-icon/'.$iconName));
+        $image = $manager->read($iconInput)->scale(height: 100)->save(base_path('public/upload/about-me/skill-icon/'.$iconName), 80);
 
         $skill = new Skill;
         $skill->name = $request->name;
@@ -365,7 +365,7 @@ class AboutController extends Controller
             $iconName = hexdec(uniqid()).'.'.$iconInput->getClientOriginalExtension();
 
             $manager = new ImageManager(Driver::class);
-            $icon = $manager->read($iconInput)->scale(height: 100)->toJpeg(80)->save(base_path('public/upload/about-me/skill-icon/'.$iconName));
+            $icon = $manager->read($iconInput)->scale(height: 100)->save(base_path('public/upload/about-me/skill-icon/'.$iconName), 80);
 
             $affectedRows = Skill::findOrFail($id)->update([
                 'name' => $request->name,

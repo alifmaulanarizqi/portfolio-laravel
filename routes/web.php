@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Home\HomeSlideController;
 use App\Http\Controllers\Backend\Home\AboutController;
+use App\Http\Controllers\Backend\Home\FooterController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +40,7 @@ Route::controller(AdminController::class)->group(function() {
 // home slider routes
 Route::controller(HomeSlideController::class)->group(function() {
     Route::get('/admin/slide', 'getHomeSlide')->name('home.slide');
-    Route::post('/adminslide', 'updateHomeSlide')->name('update.slide');
+    Route::post('/admin/slide', 'updateHomeSlide')->name('update.slide');
 });
 
 // about me routes
@@ -67,6 +68,16 @@ Route::controller(AboutController::class)->group(function() {
     Route::get('/admin/skill/edit/{id}', 'editSkill')->name('edit.skill');
     Route::post('/admin/skill/update', 'updateSkill')->name('update.skill');
     Route::post('/admin/skill/delete', 'deleteSkill')->name('delete.skill');
+});
+
+// footer routes
+Route::controller(FooterController::class)->group(function() {
+    Route::get('/admin/contact-me', 'getContactMe')->name('index.contact.me');
+    Route::post('/admin/contact-me', 'updateContactMe')->name('update.contact.me');
+    Route::get('/admin/my-address', 'getMyAddress')->name('index.my.address');
+    Route::post('/admin/my-address', 'updateMyAddress')->name('update.my.address');
+    Route::get('/admin/social', 'getSocial')->name('index.social');
+    Route::post('/admin/social', 'updateSocial')->name('update.social');
 });
 
 Route::get('/dashboard', function () {

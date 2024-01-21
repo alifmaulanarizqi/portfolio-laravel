@@ -1,3 +1,7 @@
+@php
+    $contactMe = \App\Models\Contact::find(1);
+@endphp
+
 <footer class="footer">
     <div class="container">
         <div class="row justify-content-between">
@@ -5,12 +9,12 @@
                 <div class="footer__widget">
                     <div class="fw-title">
                         <h5 class="sub-title">Contact us</h5>
-                        <h4 class="title">+81383 766 284</h4>
                     </div>
                     <div class="footer__widget__text">
-                        <p>There are many variations of passages of lorem ipsum
-                            available but the majority have suffered alteration
-                            in some form is also here.</p>
+                        <p>{{ $contactMe->short_desc }}</p>
+                        <br>
+                        <p class="text-light">{{ $contactMe->phone }}</p>
+                        <a class="text-light" href="mailto:{{$contactMe->email}}" class="mail">{{ $contactMe->email }}</a>
                     </div>
                 </div>
             </div>
@@ -18,11 +22,9 @@
                 <div class="footer__widget">
                     <div class="fw-title">
                         <h5 class="sub-title">my address</h5>
-                        <h4 class="title">AUSTRALIA</h4>
                     </div>
                     <div class="footer__widget__address">
-                        <p>Level 13, 2 Elizabeth Steereyt set <br> Melbourne, Victoria 3000</p>
-                        <a href="mailto:noreply@envato.com" class="mail">noreply@envato.com</a>
+                        <p>{{ $contactMe->address }}, {{ $contactMe->nation }}</p>
                     </div>
                 </div>
             </div>
@@ -30,16 +32,21 @@
                 <div class="footer__widget">
                     <div class="fw-title">
                         <h5 class="sub-title">Follow me</h5>
-                        <h4 class="title">socially connect</h4>
                     </div>
                     <div class="footer__widget__social">
-                        <p>Lorem ipsum dolor sit amet enim. <br> Etiam ullamcorper.</p>
                         <ul class="footer__social__list">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            @if ($contactMe->linkedin)
+                                <li><a href="{{ $contactMe->linkedin }}" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                            @endif
+                            @if ($contactMe->instagram)
+                                <li><a href="{{ $contactMe->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            @endif
+                            @if ($contactMe->twitter)
+                                <li><a href="{{ $contactMe->twitter }}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            @endif
+                            @if ($contactMe->youtube)
+                                <li><a href="{{ $contactMe->youtube }}" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
