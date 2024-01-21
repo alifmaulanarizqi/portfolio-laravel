@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Home\HomeSlideController;
 use App\Http\Controllers\Backend\Home\AboutController;
 use App\Http\Controllers\Backend\Home\FooterController;
+use App\Http\Controllers\Backend\Home\MessageController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,6 +82,14 @@ Route::controller(FooterController::class)->group(function() {
     Route::get('/admin/social', 'getSocial')->name('index.social');
     Route::post('/admin/social', 'updateSocial')->name('update.social');
 });
+
+// message routes
+Route::controller(MessageController::class)->group(function() {
+    Route::get('/admin/message', 'getMessage')->name('index.message');
+});
+
+
+
 
 Route::get('/dashboard', function () {
     return view('admin.index');
