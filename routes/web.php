@@ -24,6 +24,8 @@ Route::controller(FrontendController::class)->group(function() {
     Route::get('/', 'getMainPage');
     Route::get('/about-me', 'getAboutPage')->name('home.about');
     Route::get('/pdf-viewer', 'showPDF')->name('show.pdf');
+    Route::get('/contact', 'getContactPage')->name('home.contact');
+    Route::post('/send-message', 'sendMessage')->name('send.message');
 });
 
 //============= BACKEND =============//

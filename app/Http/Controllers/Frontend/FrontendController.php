@@ -9,6 +9,8 @@ use App\Models\HomeSlide;
 use App\Models\Award;
 use App\Models\Education;
 use App\Models\Skill;
+use App\Models\Contact;
+use App\Models\Message;
 
 class FrontendController extends Controller
 {
@@ -24,11 +26,50 @@ class FrontendController extends Controller
         $awards = Award::all();
         $educations = Education::all();
         $skills = Skill::all();
-        return view('frontend.about-me', compact('aboutMe', 'awards', 'educations', 'skills'));
+        $pageName = 'About me';
+        return view('frontend.about.about-me', compact('aboutMe', 'awards', 'educations', 'skills', 'pageName'));
     }
 
     public function showPDF() {
         $pdfPath = public_path('upload/about-me/1788046050161962.pdf');
         return response()->file($pdfPath, ['content-type' => 'application/pdf']);
+    }
+
+    public function getContactPage() {
+        $contact = Contact::select('id', 'phone', 'email', 'address', 'nation')->where('id', 1)->first();
+        $pageName = 'Contact us';
+        return view('frontend.contact.contact', compact('contact', 'pageName'));
+    }
+
+    public function sendMessage(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        $insert = Message::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+        ]);
+
+        $notif = array();
+
+        if($insert) {
+            $notif = array(
+                'message' => 'Message send successfully, we will soon send response email',
+                'alert-type' => 'success',
+            );
+        } else {
+            $notif = array(
+                'message' => 'Message send failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return redirect()->back()->with($notif);
     }
 }
