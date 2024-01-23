@@ -17,6 +17,7 @@
                             <th scope="col" width="20%">Email</th>
                             <th scope="col" width="20%">Subject</th>
                             <th scope="col">Message</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,7 +28,10 @@
                             <td>{{ $message->name }}</td>
                             <td>{{ $message->email }}</td>
                             <td>{{ $message->subject }}</td>
-                            <td>{{ $message->message }}</td>
+                            <td>{{ Str::limit($message->message, 100) }}</td>
+                            <td>
+                                <a href="{{ route('detail.message', $message->id) }}" class="btn btn-info btn-sm">Detail</a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

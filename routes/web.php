@@ -86,6 +86,7 @@ Route::controller(FooterController::class)->group(function() {
 // message routes
 Route::controller(MessageController::class)->group(function() {
     Route::get('/admin/message', 'getMessage')->name('index.message');
+    Route::get('/admin/message/{id}', 'getDetailMessage')->name('detail.message');
 });
 
 

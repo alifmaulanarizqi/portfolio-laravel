@@ -12,4 +12,9 @@ class MessageController extends Controller
         $messages = Message::latest()->get();
         return view('admin.message.message', compact('messages'));
     }
+
+    public function getDetailMessage($id) {
+        $message = Message::find($id);
+        return view('admin.message.detail-message', compact('message'));
+    }
 }
