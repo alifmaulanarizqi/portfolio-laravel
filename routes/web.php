@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\Home\HomeSlideController;
 use App\Http\Controllers\Backend\Home\AboutController;
 use App\Http\Controllers\Backend\Home\FooterController;
 use App\Http\Controllers\Backend\Home\MessageController;
+use App\Http\Controllers\Backend\Home\PortfolioController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,6 +88,16 @@ Route::controller(FooterController::class)->group(function() {
 Route::controller(MessageController::class)->group(function() {
     Route::get('/admin/message', 'getMessage')->name('index.message');
     Route::get('/admin/message/{id}', 'getDetailMessage')->name('detail.message');
+});
+
+// portfolio routes
+Route::controller(PortfolioController::class)->group(function() {
+    Route::get('/admin/category', 'getCategory')->name('index.category');
+    Route::get('/admin/category/add', 'addCategory')->name('add.category');
+    Route::post('/admin/category/store', 'storeCategory')->name('store.category');
+    Route::get('/admin/category/edit/{id}', 'editCategory')->name('edit.category');
+    Route::post('/admin/category/update', 'updateCategory')->name('update.category');
+    Route::post('/admin/category/delete', 'deleteCategory')->name('delete.category');
 });
 
 

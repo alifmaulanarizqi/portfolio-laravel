@@ -14,18 +14,20 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
+                        <i class="ri-image-line"></i>
                         <span>Home Slide</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('home.slide') }}">Home Slide</a></li>
                     </ul>
                 </li>
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
+                        <i class="ri-error-warning-line"></i>
                         <span>About</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -41,9 +43,10 @@
                         <li><a href="{{ route('index.skill') }}">Skill</a></li>
                     </ul>
                 </li>
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
+                        <i class="ri-layout-bottom-2-line"></i>
                         <span>Footer</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -56,6 +59,7 @@
                         <li><a href="{{ route('index.social') }}">Social Media</a></li>
                     </ul>
                 </li>
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-mail-send-line"></i>
@@ -63,6 +67,16 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('index.message') }}">Message from visitor</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-apps-line"></i>
+                        <span>Portfolio</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('index.category') }}">Category</a></li>
                     </ul>
                 </li>
             </ul>
