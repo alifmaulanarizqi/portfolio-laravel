@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Portfolio;
 use App\Models\PortfolioImage;
 use App\Models\PortfolioCategory;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Support\Facades\File;
 
 class PortfolioController extends Controller
 {
+    // category
     public function getCategory() {
         $categories = PortfolioCategory::latest()->get();
         return view('admin.portfolio.portfolio-category', compact('categories'));
@@ -99,5 +103,79 @@ class PortfolioController extends Controller
         }
 
         return Redirect()->route('index.category')->with($notif);
+    }
+
+
+
+    // portfolio
+    public function getPortfolio() {
+        $porfolios = Portfolio::latest()->get();
+        return view('admin.portfolio.portfolio', compact('porfolios'));
+    }
+
+    public function addPortfolio() {
+        $categories = PortfolioCategory::all();
+        return view('admin.portfolio.add-portfolio', compact('categories'));
+    }
+
+    public function storePortfolio(Request $request) {
+        $validated = $request->validate([
+            'title' => 'required',
+            'portfolio_category_id' => 'required',
+            'image_thumbnail' => 'required',
+            'long_desc' => 'required',
+        ]);
+
+        $imageInput = $request->file('image_thumbnail');
+        $imageName = hexdec(uniqid()).'.'.$imageInput->getClientOriginalExtension();
+        $manager = new ImageManager(Driver::class);
+        $image = $manager->read($imageInput)->scale(height: 800)->toJpeg(80)->save(base_path('public/upload/portfolio/'.$imageName));
+
+        $portfolio = new Portfolio;
+        $portfolio->title = $request->title;
+        $portfolio->image_thumbnail = 'upload/portfolio/'.$imageName;
+        $portfolio->portfolio_category_id = $request->portfolio_category_id;
+        $portfolio->desc = $request->long_desc;
+        $portfolio->client = $request->client;
+        $portfolio->project_link = $request->project_link;
+
+        $notif = array();
+
+        if($portfolio->save()) {
+            $protfolioId = $portfolio->id;
+
+            $imageProjectInsertData = [];
+            $portfolioImage = new PortfolioImage;
+
+            foreach($request->image_project as $imageProject) {
+                $imageName = hexdec(uniqid()).'.'.$imageProject->getClientOriginalExtension();
+                $image = $manager->read($imageProject)->scale(height: 800)->toJpeg(80)->save(base_path('public/upload/portfolio/'.$imageName));
+
+                array_push(
+                    $imageProjectInsertData,
+                    [
+                        'image' => 'upload/portfolio/'.$imageName,
+                        'portfolio_id' => $protfolioId,
+                    ]
+                );
+            }
+
+            $portfolioImage = PortfolioImage::insert($imageProjectInsertData);
+
+            if($portfolioImage) {
+                $notif = array(
+                    'message' => 'Portfolio added successfully',
+                    'alert-type' => 'success',
+                );
+            } else {
+                Portfolio::find($protfolioId)->delete();
+                $notif = array(
+                    'message' => 'Portfolio added failed',
+                    'alert-type' => 'error',
+                );
+            }
+        }
+
+        return Redirect()->route('index.portfolio')->with($notif);
     }
 }

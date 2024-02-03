@@ -77,6 +77,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{ route('index.category') }}">Category</a></li>
+                        <li><a href="{{ route('index.portfolio') }}">Portfolio</a></li>
                     </ul>
                 </li>
             </ul>

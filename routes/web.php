@@ -98,6 +98,10 @@ Route::controller(PortfolioController::class)->group(function() {
     Route::get('/admin/category/edit/{id}', 'editCategory')->name('edit.category');
     Route::post('/admin/category/update', 'updateCategory')->name('update.category');
     Route::post('/admin/category/delete', 'deleteCategory')->name('delete.category');
+
+    Route::get('/admin/portfolio', 'getPortfolio')->name('index.portfolio');
+    Route::get('/admin/portfolio/add', 'addPortfolio')->name('add.portfolio');
+    Route::post('/admin/portfolio/store', 'storePortfolio')->name('store.portfolio');
 });
 
 

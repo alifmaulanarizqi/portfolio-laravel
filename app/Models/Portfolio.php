@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Portfolio extends Model
 {
@@ -14,6 +15,11 @@ class Portfolio extends Model
 
     public function portfolioCategory(): BelongsTo
     {
-        return $this->belongsTo(Portfolio::class, 'portfolio_category_id');
+        return $this->belongsTo(PortfolioCategory::class, 'portfolio_category_id');
+    }
+
+    public function portfolioImages(): HasMany
+    {
+        return $this->HasMany(PortfolioImage::class, 'portfolio_id');
     }
 }
