@@ -16,7 +16,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col"  width="20%">Skill</th>
+                            <th scope="col" width="20%">Skill</th>
                             <th scope="col" width="12%">Proficiency</th>
                             <th scope="col" width="30%">Image</th>
                             <th scope="col">Action</th>

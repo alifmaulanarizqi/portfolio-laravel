@@ -16,20 +16,22 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Thumbail</th>
-                            <th scope="col">Desc</th>
-                            <th scope="col">Action</th>
+                            <th scope="col" width="20%">Title</th>
+                            <th scope="col" width="15%">Category</th>
+                            <th scope="col" width="15%">Thumbail</th>
+                            <th scope="col" width="30%">Desc</th>
+                            <th scope="col" width="25%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php($i = 1)
+                        @foreach ($porfolios as $porfolio)
                         <tr>
-                            <td scope="row">1</td>
-                            <td>title 1</td>
-                            <td>category 1</td>
-                            <td>thumbnail 1</td>
-                            <td>desc 1</td>
+                            <td scope="row">{{ $i++ }}</td>
+                            <td>{{ $porfolio->title }}</td>
+                            <td>{{ $porfolio->portfolioCategory->name }}</td>
+                            <td><img src="{{ asset($porfolio->image_thumbnail) }}" style="width: 150px" alt="Portfolio thumbnail"></td>
+                            <td>{!! Str::limit($porfolio->desc, 100) !!}</td>
                             <td>
                                 <a href="" class="btn btn-primary btn-sm">Detail</a>
                                 <a href="" class="btn btn-info btn-sm">Edit</a>
@@ -66,6 +68,7 @@
 
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
