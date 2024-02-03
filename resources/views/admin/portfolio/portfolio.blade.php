@@ -25,15 +25,15 @@
                     </thead>
                     <tbody>
                         @php($i = 1)
-                        @foreach ($porfolios as $porfolio)
+                        @foreach ($porfolios as $portfolio)
                         <tr>
                             <td scope="row">{{ $i++ }}</td>
-                            <td>{{ $porfolio->title }}</td>
-                            <td>{{ $porfolio->portfolioCategory->name }}</td>
-                            <td><img src="{{ asset($porfolio->image_thumbnail) }}" style="width: 150px" alt="Portfolio thumbnail"></td>
-                            <td>{!! Str::limit($porfolio->desc, 100) !!}</td>
+                            <td>{{ $portfolio->title }}</td>
+                            <td>{{ $portfolio->portfolioCategory->name }}</td>
+                            <td><img src="{{ asset($portfolio->image_thumbnail) }}" style="width: 150px" alt="Portfolio thumbnail"></td>
+                            <td>{!! Str::limit($portfolio->desc, 100) !!}</td>
                             <td>
-                                <a href="" class="btn btn-primary btn-sm">Detail</a>
+                                <a href="{{ route('detail.portfolio', $portfolio->id) }}" class="btn btn-primary btn-sm">Detail</a>
                                 <a href="" class="btn btn-info btn-sm">Edit</a>
                                 <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
 

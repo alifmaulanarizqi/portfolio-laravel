@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title mb-4">About Me</h4>
+                        <h4 class="card-title mb-4">Message Detail</h4>
 
                         <div class="row mb-3">
                             <p class="col-sm-2">Name :</p>

@@ -178,4 +178,10 @@ class PortfolioController extends Controller
 
         return Redirect()->route('index.portfolio')->with($notif);
     }
+
+    public function getDetailPortfolio($id) {
+        $portfolio = Portfolio::find($id);
+        $projectImages = PortfolioImage::where('portfolio_id', $id)->get();
+        return view('admin.portfolio.detail-portfolio', compact('portfolio', 'projectImages'));
+    }
 }
