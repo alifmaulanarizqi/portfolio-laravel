@@ -181,7 +181,51 @@ class PortfolioController extends Controller
 
     public function getDetailPortfolio($id) {
         $portfolio = Portfolio::find($id);
-        $projectImages = PortfolioImage::where('portfolio_id', $id)->get();
+        $projectImages = $portfolio->portfolioImages;
         return view('admin.portfolio.detail-portfolio', compact('portfolio', 'projectImages'));
+    }
+
+    public function deletePortfolio() {
+        $id = $_POST['deleteId'];
+        $portfolio = Portfolio::where('id', $id)->first();
+        $portfolioImages = $portfolio->portfolioImages;
+
+        $affectedRows = -1;
+        if($portfolio->image_thumbnail) {
+            $deletedImageFilePath = $portfolio->image_thumbnail;
+            if (File::exists(public_path($deletedImageFilePath))) {
+                File::delete(public_path($deletedImageFilePath));
+            }
+
+            // $affectedRows = $portfolio->delete();
+        }
+
+        if(count($portfolioImages) !== 0) {
+            foreach($portfolioImages as $portfolioImage) {
+                $deletedImageFilePath = $portfolioImage->image;
+                if (File::exists(public_path($deletedImageFilePath))) {
+                    File::delete(public_path($deletedImageFilePath));
+                }
+            }
+        }
+
+        $affectedRows = $portfolio->delete();
+        $affectedRows = PortfolioImage::where('portfolio_id', $id)->delete();
+
+        $notif = array();
+
+        if($affectedRows > 0) {
+            $notif = array(
+                'message' => 'Portfolio deleted successfully',
+                'alert-type' => 'success',
+            );
+        } else {
+            $notif = array(
+                'message' => 'Portfolio delete failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return Redirect()->route('index.portfolio')->with($notif);
     }
 }

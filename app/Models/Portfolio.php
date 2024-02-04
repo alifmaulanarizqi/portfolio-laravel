@@ -20,6 +20,6 @@ class Portfolio extends Model
 
     public function portfolioImages(): HasMany
     {
-        return $this->HasMany(PortfolioImage::class, 'portfolio_id');
+        return $this->hasMany(PortfolioImage::class, 'portfolio_id');
     }
 }

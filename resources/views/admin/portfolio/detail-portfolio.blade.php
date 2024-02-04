@@ -53,7 +53,7 @@
                 <div class="form-group mb-2">
                     <label for="portfolio_category_id">Category</label>
                     <input type="text" class="form-control" name="portfolio_category_id" id="portfolio_category_id"
-                        value="{{ $portfolio->portfolioCategory->name }}" readonly>
+                        value="{{ $portfolio->portfolioCategory->name ?? 'Uncategorized' }}" readonly>
                 </div>
 
                 <div class="form-group mb-3">

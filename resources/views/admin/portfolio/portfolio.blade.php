@@ -29,16 +29,16 @@
                         <tr>
                             <td scope="row">{{ $i++ }}</td>
                             <td>{{ $portfolio->title }}</td>
-                            <td>{{ $portfolio->portfolioCategory->name }}</td>
+                            <td>{{ $portfolio->portfolioCategory->name ?? 'Uncategorized' }}</td>
                             <td><img src="{{ asset($portfolio->image_thumbnail) }}" style="width: 150px" alt="Portfolio thumbnail"></td>
                             <td>{!! Str::limit($portfolio->desc, 100) !!}</td>
                             <td>
                                 <a href="{{ route('detail.portfolio', $portfolio->id) }}" class="btn btn-primary btn-sm">Detail</a>
                                 <a href="" class="btn btn-info btn-sm">Edit</a>
-                                <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-id="{{ $portfolio->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
 
                                 <!-- Modal -->
-                                {{-- <div class="modal fade" id="deleteModal" tabindex="-1"
+                                <div class="modal fade" id="deleteModal" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -50,10 +50,10 @@
                                                 </button>
                                             </div>
 
-                                            <form action="{{ route('delete.category') }}" method="post">
+                                            <form action="{{ route('delete.portfolio') }}" method="post">
                                                 @csrf
                                                 <div class="modal-body">
-                                                    <input type="hidden" name="deleteId" id="deleteId" value="{{ $category->id }}">
+                                                    <input type="hidden" name="deleteId" id="deleteId">
                                                     Are you sure to delete?
                                                 </div>
                                                 <div class="modal-footer">
@@ -64,7 +64,7 @@
 
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
 
                             </td>
                         </tr>
@@ -75,5 +75,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var id = button.getAttribute('data-bs-id');
+        var deleteIdInput = document.getElementById('deleteId');
+        deleteIdInput.value = id;
+    });
+</script>
 
 @endsection
