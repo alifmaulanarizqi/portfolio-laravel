@@ -32,7 +32,7 @@
                             <td><img src="{{ asset($skill->icon) }}" alt="skill icon"></td>
                             <td>
                                 <a href="{{ route('edit.skill', $skill->id) }}" class="btn btn-info btn-sm">Edit</a>
-                                <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-id="{{ $skill->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="deleteModal" tabindex="-1"
@@ -72,5 +72,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var id = button.getAttribute('data-bs-id');
+        var deleteIdInput = document.getElementById('deleteId');
+        deleteIdInput.value = id;
+    });
+</script>
 
 @endsection

@@ -37,7 +37,7 @@
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                                                <button type="button" class="close" data-bs-dismiss="modal"
+                                                <button type="button" class="close" data-bs-id="{{ $category->id }}" data-bs-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
@@ -68,5 +68,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var id = button.getAttribute('data-bs-id');
+        var deleteIdInput = document.getElementById('deleteId');
+        deleteIdInput.value = id;
+    });
+</script>
 
 @endsection
