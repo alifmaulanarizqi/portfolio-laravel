@@ -28,6 +28,7 @@ Route::controller(FrontendController::class)->group(function() {
     Route::get('/pdf-viewer', 'showPDF')->name('show.pdf');
     Route::get('/contact', 'getContactPage')->name('home.contact');
     Route::post('/send-message', 'sendMessage')->name('send.message');
+    Route::get('/portfolio', 'getPortfolioPage')->name('home.portfolio');
 });
 
 //============= BACKEND =============//

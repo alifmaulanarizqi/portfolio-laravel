@@ -22,10 +22,8 @@ class FrontendController extends Controller
         $aboutMe = AboutMe::find(1);
         $homeSlide = HomeSlide::find(1);
         $skills = Skill::latest()->get();
-
-        // $portfolioCategories = PortfolioCategory::all();
-
         $portfolios = Portfolio::all();
+
         $portfolioBasedOnCategory = [];
 
         foreach($portfolios as $portfolio) {
@@ -39,6 +37,7 @@ class FrontendController extends Controller
                 $category,
                 $portfolio->title,
                 $portfolio->image_thumbnail,
+                null,
             );
         }
 
@@ -51,6 +50,7 @@ class FrontendController extends Controller
         $educations = Education::all();
         $skills = Skill::all();
         $pageName = 'About me';
+
         return view('frontend.about.about-me', compact('aboutMe', 'awards', 'educations', 'skills', 'pageName'));
     }
 
@@ -62,6 +62,7 @@ class FrontendController extends Controller
     public function getContactPage() {
         $contact = Contact::select('id', 'phone', 'email', 'address', 'nation')->where('id', 1)->first();
         $pageName = 'Contact us';
+
         return view('frontend.contact.contact', compact('contact', 'pageName'));
     }
 
@@ -95,5 +96,29 @@ class FrontendController extends Controller
         }
 
         return redirect()->back()->with($notif);
+    }
+
+    public function getPortfolioPage() {
+        $pageName = 'Portfolio';
+        $portfolios = Portfolio::all();
+
+        $portfolioBasedOnCategory = [];
+
+        foreach($portfolios as $portfolio) {
+            $category = $portfolio->portfolioCategory->name;
+            if(!array_key_exists($category, $portfolioBasedOnCategory)) {
+                $portfolioBasedOnCategory[$category] = [];
+            }
+
+            $portfolioBasedOnCategory[$category][] = new PortfolioValueObject(
+                $portfolio->id,
+                $category,
+                $portfolio->title,
+                $portfolio->image_thumbnail,
+                $portfolio->desc,
+            );
+        }
+
+        return view('frontend.portfolio.portfolio', compact('pageName', 'portfolioBasedOnCategory'));
     }
 }
