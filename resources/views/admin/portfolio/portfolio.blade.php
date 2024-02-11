@@ -34,7 +34,7 @@
                             <td>{!! Str::limit($portfolio->desc, 100) !!}</td>
                             <td>
                                 <a href="{{ route('detail.portfolio', $portfolio->id) }}" class="btn btn-primary btn-sm">Detail</a>
-                                <a href="" class="btn btn-info btn-sm">Edit</a>
+                                <a href="{{ route('edit.portfolio', $portfolio->id) }}" class="btn btn-info btn-sm">Edit</a>
                                 <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-id="{{ $portfolio->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
 
                                 <!-- Modal -->
