@@ -121,4 +121,11 @@ class FrontendController extends Controller
 
         return view('frontend.portfolio.portfolio', compact('pageName', 'portfolioBasedOnCategory'));
     }
+
+    public function getPortfolioDetailPage($id) {
+        $pageName = 'Portfolio Detail';
+        $portfolio = Portfolio::find($id);
+
+        return view('frontend.portfolio.detail-portfolio', compact('pageName', 'portfolio'));
+    }
 }

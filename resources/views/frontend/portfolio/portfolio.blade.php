@@ -45,7 +45,7 @@
                                 <div class="portfolio__inner__content">
                                     <h2 class="title"><a href="portfolio-details.html">{{ $valueInner->title }}</a></h2>
                                     <p>{!! $valueInner->desc !!}</p>
-                                    <a href="portfolio-details.html" class="link">View Case Study</a>
+                                    <a href="{{ route('home.detail.portfolio', $valueInner->id) }}" class="link">View Case Study</a>
                                 </div>
                             </div>
                         </div>

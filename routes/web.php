@@ -29,6 +29,7 @@ Route::controller(FrontendController::class)->group(function() {
     Route::get('/contact', 'getContactPage')->name('home.contact');
     Route::post('/send-message', 'sendMessage')->name('send.message');
     Route::get('/portfolio', 'getPortfolioPage')->name('home.portfolio');
+    Route::get('/portfolio/{id}', 'getPortfolioDetailPage')->name('home.detail.portfolio');
 });
 
 //============= BACKEND =============//

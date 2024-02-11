@@ -49,7 +49,7 @@
                                         <div class="portfolio__overlay__content">
                                             <span>{{ $valueInner->category }}</span>
                                             <h4 class="title"><a href="portfolio-details.html">{{ $valueInner->title }}</a></h4>
-                                            <a href="portfolio-details.html" class="link">Case Study</a>
+                                            <a href="{{ route('home.detail.portfolio', $valueInner->id) }}" class="link">Case Study</a>
                                         </div>
                                     </div>
 
@@ -84,7 +84,7 @@
                                         <div class="portfolio__overlay__content">
                                             <span>{{ $valueInner->category }}</span>
                                             <h4 class="title"><a href="portfolio-details.html">{{ $valueInner->title }}</a></h4>
-                                            <a href="portfolio-details.html" class="link">Case Study</a>
+                                            <a href="{{ route('home.detail.portfolio', $valueInner->id) }}" class="link">Case Study</a>
                                         </div>
                                     </div>
                                 @endforeach
