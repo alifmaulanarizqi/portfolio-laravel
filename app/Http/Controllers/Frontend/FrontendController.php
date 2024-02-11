@@ -11,6 +11,10 @@ use App\Models\Education;
 use App\Models\Skill;
 use App\Models\Contact;
 use App\Models\Message;
+use App\Models\Portfolio;
+use App\Models\PortfolioCategory;
+use App\Models\PortfolioImage;
+use App\Http\ValueObject\PortfolioValueObject;
 
 class FrontendController extends Controller
 {
@@ -18,7 +22,27 @@ class FrontendController extends Controller
         $aboutMe = AboutMe::find(1);
         $homeSlide = HomeSlide::find(1);
         $skills = Skill::latest()->get();
-        return view('frontend.index', compact('aboutMe', 'homeSlide', 'skills'));
+
+        // $portfolioCategories = PortfolioCategory::all();
+
+        $portfolios = Portfolio::all();
+        $portfolioBasedOnCategory = [];
+
+        foreach($portfolios as $portfolio) {
+            $category = $portfolio->portfolioCategory->name;
+            if(!array_key_exists($category, $portfolioBasedOnCategory)) {
+                $portfolioBasedOnCategory[$category] = [];
+            }
+
+            $portfolioBasedOnCategory[$category][] = new PortfolioValueObject(
+                $portfolio->id,
+                $category,
+                $portfolio->title,
+                $portfolio->image_thumbnail,
+            );
+        }
+
+        return view('frontend.index', compact('aboutMe', 'homeSlide', 'skills', 'portfolioBasedOnCategory'));
     }
 
     public function getAboutPage() {
