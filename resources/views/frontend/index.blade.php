@@ -9,6 +9,10 @@
 @include('frontend.home-all.about-me')
 <!-- about-area-end -->
 
+<!-- experience-area -->
+@include('frontend.home-all.experience')
+<!-- experience-area-end -->
+
 <!-- portfolio-area -->
 @include('frontend.home-all.portfolio')
 <!-- portfolio-area-end -->

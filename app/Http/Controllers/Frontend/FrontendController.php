@@ -14,6 +14,7 @@ use App\Models\Message;
 use App\Models\Portfolio;
 use App\Models\PortfolioCategory;
 use App\Models\PortfolioImage;
+use App\Models\Experience;
 use App\Http\ValueObject\PortfolioValueObject;
 
 class FrontendController extends Controller
@@ -23,6 +24,7 @@ class FrontendController extends Controller
         $homeSlide = HomeSlide::find(1);
         $skills = Skill::latest()->get();
         $portfolios = Portfolio::all();
+        $experiences = Experience::all();
 
         $portfolioBasedOnCategory = [];
 
@@ -41,7 +43,7 @@ class FrontendController extends Controller
             );
         }
 
-        return view('frontend.index', compact('aboutMe', 'homeSlide', 'skills', 'portfolioBasedOnCategory'));
+        return view('frontend.index', compact('aboutMe', 'homeSlide', 'skills', 'portfolioBasedOnCategory', 'experiences'));
     }
 
     public function getAboutPage() {

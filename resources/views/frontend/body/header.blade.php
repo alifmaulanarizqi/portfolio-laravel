@@ -20,9 +20,6 @@
                                     <li><a href="{{ route('home.contact') }}">contact me</a></li>
                                 </ul>
                             </div>
-                            <div class="header__btn d-none d-md-block">
-                                <a href="contact.html" class="btn">Contact me</a>
-                            </div>
                         </nav>
                     </div>
                     <!-- Mobile Menu  -->
