@@ -33,7 +33,7 @@
                             <td>{{ $experience->entry_date }}</td>
                             <td>{!! $experience->desc !!}</td>
                             <td>
-                                <a href="" class="btn btn-primary btn-sm">Detail</a>
+                                <a href="{{ route('detail.experience', $experience->id) }}" class="btn btn-primary btn-sm">Detail</a>
                                 <a href="" class="btn btn-info btn-sm">Edit</a>
                                 <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
 

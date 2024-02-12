@@ -76,8 +76,8 @@
                 </div>
 
                 <div class="form-group mb-2">
-                    <label for="elm1">Description <span class="text-danger">*</span></label>
-                    <textarea class="form-control" name="long_desc" rows="5" readonly>{{ strip_tags($portfolio->desc) }}</textarea>
+                    <label for="elm1">Description </label>
+                    <textarea id="elm1" class="form-control" name="long_desc" rows="5" readonly>{{ $portfolio->desc }}</textarea>
                 </div>
 
                 <div class="form-group mb-3">

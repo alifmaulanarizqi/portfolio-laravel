@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="form-group mb-5">
-                        <label for="entry_date">Entry Date <span class="text-danger">*</span></label>
+                        <label for="entry_date">Entry date <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" name="entry_date" id="entry_date"
                         @error('entry_date')
                             <span class="text-danger">{{ $message }}</span>
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="form-group mb-2 mt-2">
-                        <label for="exit_date">Exit Date <span class="text-danger">*</span></label>
+                        <label for="exit_date">Exit date <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" name="exit_date" id="exit_date"
                         @error('exit_date')
                             <span class="text-danger">{{ $message }}</span>

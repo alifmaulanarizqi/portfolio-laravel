@@ -52,4 +52,9 @@ class ExperienceController extends Controller
 
         return Redirect()->route('index.experience')->with($notif);
     }
+
+    public function getDetailExperience($id) {
+        $experience = Experience::find($id);
+        return view('admin.experience.detail-experience', compact('experience'));
+    }
 }
