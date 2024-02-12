@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\Home\AboutController;
 use App\Http\Controllers\Backend\Home\FooterController;
 use App\Http\Controllers\Backend\Home\MessageController;
 use App\Http\Controllers\Backend\Home\PortfolioController;
+use App\Http\Controllers\Backend\Home\ExperienceController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -108,6 +109,13 @@ Route::controller(PortfolioController::class)->group(function() {
     Route::get('/admin/portfolio/edit/{id}', 'editPortfolio')->name('edit.portfolio');
     Route::post('/admin/portfolio/update', 'updatePortfolio')->name('update.portfolio');
     Route::post('/admin/portfolio/delete', 'deletePortfolio')->name('delete.portfolio');
+});
+
+// experience routes
+Route::controller(ExperienceController::class)->group(function() {
+    Route::get('/admin/experience', 'getExperience')->name('index.experience');
+    Route::get('/admin/experience/add', 'addExperience')->name('add.experience');
+    Route::post('/admin/experience/store', 'storeExperience')->name('store.experience');
 });
 
 

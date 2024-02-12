@@ -6,8 +6,13 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0.5/dist/fancybox.css">
 
 <style>
+    @media (min-width: 600px) {
+        .vrmedia-gallery {
+            width: 80%;
+        }
+    }
+
     .vrmedia-gallery {
-        max-width: 80%;
         background: white;
         padding: 12px;
         box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
