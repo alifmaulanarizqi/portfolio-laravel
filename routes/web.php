@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 //============= FRONTEND =============//
 Route::controller(FrontendController::class)->group(function() {
-    Route::get('/', 'getMainPage');
+    Route::get('/', 'getMainPage')->name('home');
     Route::get('/about-me', 'getAboutPage')->name('home.about');
     Route::get('/pdf-viewer', 'showPDF')->name('show.pdf');
     Route::get('/contact', 'getContactPage')->name('home.contact');
