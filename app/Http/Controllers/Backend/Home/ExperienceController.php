@@ -101,4 +101,28 @@ class ExperienceController extends Controller
 
         return Redirect()->route('index.experience')->with($toastNotif);
     }
+
+    public function deleteExperience() {
+        $id = $_POST['deleteId'];
+        $experience = Experience::where('id', $id)->first();
+
+        $delete = $experience->delete();
+
+        $toastNotif = array();
+
+        if($delete) {
+            $toastNotif = array(
+                'message' => 'Experience deleted successfully',
+                'alert-type' => 'success',
+            );
+        } else {
+            $toastNotif = array(
+                'message' => 'Experience delete failed',
+                'alert-type' => 'error',
+            );
+        }
+
+        return Redirect()->route('index.experience')->with($toastNotif);
+    }
+
 }

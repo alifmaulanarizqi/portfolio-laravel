@@ -35,25 +35,25 @@
                             <td>
                                 <a href="{{ route('detail.experience', $experience->id) }}" class="btn btn-primary btn-sm">Detail</a>
                                 <a href="{{ route('edit.experience', $experience->id) }}" class="btn btn-info btn-sm">Edit</a>
-                                <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
+                                <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $experience->id }}">Delete</a>
 
                                 <!-- Modal -->
-                                {{-- <div class="modal fade" id="deleteModal" tabindex="-1"
+                                <div class="modal fade" id="deleteModal" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-                                                <button type="button" class="close" data-bs-id="{{ $category->id }}" data-bs-dismiss="modal"
+                                                <button type="button" class="close" data-bs-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
 
-                                            <form action="{{ route('delete.category') }}" method="post">
+                                            <form action="{{ route('delete.experience') }}" method="post">
                                                 @csrf
                                                 <div class="modal-body">
-                                                    <input type="hidden" name="deleteId" id="deleteId" value="{{ $category->id }}">
+                                                    <input type="hidden" name="deleteId" id="deleteId" value="{{ $experience->id }}">
                                                     Are you sure to delete?
                                                 </div>
                                                 <div class="modal-footer">
@@ -64,7 +64,7 @@
 
                                         </div>
                                     </div>
-                                </div> --}}
+                                </div>
 
                             </td>
                         </tr>
@@ -78,13 +78,13 @@
 </div>
 
 <script>
-    // var deleteModal = document.getElementById('deleteModal');
-    // deleteModal.addEventListener('show.bs.modal', function (event) {
-    //     var button = event.relatedTarget;
-    //     var id = button.getAttribute('data-bs-id');
-    //     var deleteIdInput = document.getElementById('deleteId');
-    //     deleteIdInput.value = id;
-    // });
+    var deleteModal = document.getElementById('deleteModal');
+    deleteModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var id = button.getAttribute('data-bs-id');
+        var deleteIdInput = document.getElementById('deleteId');
+        deleteIdInput.value = id;
+    });
 </script>
 
 @endsection

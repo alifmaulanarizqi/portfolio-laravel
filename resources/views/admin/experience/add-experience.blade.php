@@ -2,7 +2,7 @@
 
 @section('admin')
 
-<div class="content-wrapper">
+<div class="content-wrapper mb-5">
     <div class="content">
         <div class="card card-default">
             <div class="card-header card-header-border-bottom">
