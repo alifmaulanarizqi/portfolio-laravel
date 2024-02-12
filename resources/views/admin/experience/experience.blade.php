@@ -31,10 +31,10 @@
                             <td>{{ $experience->company }}</td>
                             <td>{{ $experience->role }}</td>
                             <td>{{ $experience->entry_date }}</td>
-                            <td>{!! $experience->desc !!}</td>
+                            <td>{!! Str::limit($experience->desc, 100) !!}</td>
                             <td>
                                 <a href="{{ route('detail.experience', $experience->id) }}" class="btn btn-primary btn-sm">Detail</a>
-                                <a href="" class="btn btn-info btn-sm">Edit</a>
+                                <a href="{{ route('edit.experience', $experience->id) }}" class="btn btn-info btn-sm">Edit</a>
                                 <a class="btn btn-danger btn-sm text-white deleteBtn" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
 
                                 <!-- Modal -->

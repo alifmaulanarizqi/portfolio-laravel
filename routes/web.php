@@ -117,6 +117,8 @@ Route::controller(ExperienceController::class)->group(function() {
     Route::get('/admin/experience/add', 'addExperience')->name('add.experience');
     Route::post('/admin/experience/store', 'storeExperience')->name('store.experience');
     Route::get('/admin/experience/{id}', 'getDetailExperience')->name('detail.experience');
+    Route::get('/admin/experience/edit/{id}', 'editExperience')->name('edit.experience');
+    Route::post('/admin/experience/update', 'updateExperience')->name('update.experience');
 });
 
 
